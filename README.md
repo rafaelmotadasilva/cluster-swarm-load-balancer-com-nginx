@@ -1,6 +1,6 @@
 # Configuração do Cluster Docker Swarm com Load Balancer NGINX
 
-O Docker Swarm, junto com um balanceador de carga NGINX, oferece uma solução poderosa para gerenciar aplicativos em contêineres em ambientes distribuídos. Este guia apresenta as etapas para configurar e implantar um cluster Docker Swarm, além de configurar um balanceador de carga NGINX para distribuir o tráfego entre os nós do cluster.
+O Docker Swarm, junto com um balanceador de carga NGINX, oferece uma solução poderosa para gerenciar aplicativos em contêineres em ambientes distribuídos.
 
 ## Visão Geral
 
@@ -23,7 +23,7 @@ Antes de iniciar, é fundamental ter acesso a três nós: um para atuar como nó
 Para iniciar, é necessário configurar o cluster Swarm em dois dos três nós. Execute o comando a seguir para iniciar o cluster Swarm:
 
 ```
-sudo docker swarm init --advertise-addr <IP-master>
+sudo docker swarm init
 ```
 
 Isso resultará em uma saída informando como adicionar nós ao cluster:
@@ -33,7 +33,7 @@ Swarm initialized: current node (4uozaria1motuuuz66n9jeeys) is now a manager.
 
 To add a worker to this swarm, run the following command:
 
-    docker swarm join --token SWMTKN-1-1bu8smhaerewus9mn3m821zxqvtnd8mq82m9ppnv83wxijvhnk-0yuk9yx31ch7nhll6s1z6khyo <IP-master>:2377
+    docker swarm join --token SWMTKN-1-1bu8smhaerewus9mn3m821zxqvtnd8mq82m9ppnv83wxijvhnk-0yuk9yx31ch7nhll6s1z6khyo <IP-do Manager>:2377
 
 To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
 ```
@@ -43,7 +43,7 @@ To add a manager to this swarm, run 'docker swarm join-token manager' and follow
 Para adicionar um Node Worker ao cluster Swarm, execute o seguinte comando:
 
 ```
-sudo docker swarm join --token SWMTKN-1-1bu8smhaerewus9mn3m821zxqvtnd8mq82m9ppnv83wxijvhnk-0yuk9yx31ch7nhll6s1z6khyo <IP-master>:2377
+sudo docker swarm join --token SWMTKN-1-1bu8smhaerewus9mn3m821zxqvtnd8mq82m9ppnv83wxijvhnk-0yuk9yx31ch7nhll6s1z6khyo <IP-do-Manager>:2377
 ```
 
 Após adicionar o Node Worker ao cluster Swarm, você pode verificá-lo com o seguinte comando no Node Master:
