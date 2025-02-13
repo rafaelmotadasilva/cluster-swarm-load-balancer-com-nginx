@@ -95,7 +95,7 @@ b9mvrug6d7qz   backend   replicated   2/2        nginx:latest   *:8080->80/tcp
 Para configurar o Load Balancer, inicialize um novo cluster Swarm no Node do Load Balancer com o seguinte comando:
 
 ```
-sudo docker swarm init --advertise-addr <IP-load-balancer>
+sudo docker swarm init
 ```
 Em seguida, crie o diretório para o Load Balancer com o seguinte comando:
 
@@ -119,6 +119,7 @@ server {
    }
 }
 upstream backend {
+   # Substitua 'ip-master' e 'ip-node01' pelos IPs reais dos servidores backend
    server ip-master:8080;
    server ip-node01:8080;
 }
@@ -141,7 +142,7 @@ verify: Service converged
 
 Este comando criará um contêiner Nginx e permitirá conexões com os serviços web hospedados pelo seu Docker Swarm.
 
-Agora, abra seu navegador e verifique o Load Balancing utilizando a URL http://ip-loadbalancer. Você deverá visualizar a página do Nginx.
+Agora, abra seu navegador e verifique o Load Balancing utilizando a URL http://ip-loadbalancer (substituindo ip-loadbalancer pelo IP do servidor onde o Load Balancer está rodando). Você deverá visualizar a página do Nginx.
 
 ## Conclusão
 
